@@ -1,0 +1,70 @@
+<!-- 顶部搜索栏 -->
+<view class="search-bar">
+  <view class="search-input-wrap">
+    <image class="search-icon" src="/images/me-1.png" mode="aspectFit"></image>
+    <input class="search-input" placeholder="输入关键字搜索......" placeholder-class="search-placeholder" />
+  </view>
+</view>
+
+<!-- 使用须知区块 -->
+<view class="notice-wrap">
+  <view class="notice-card">
+    <view class="notice-title">
+      <text>使用须知</text>
+      <view class="title-arrow"></view>
+    </view>
+    <view class="notice-content">
+      <text>为了更好的管理发布内容，我校所有信息发布均需通过管理员审核，请参照《发布协议》按照正确分组发布。</text>
+      <text>禁止发布的内容包括但不限于虚假信息、诈骗、涉黄、涉赌、涉毒等，具体内容参照《网络信息内容生态治理规定》。</text>
+    </view>
+  </view>
+</view>
+
+<!-- 标签栏+发布按钮 -->
+<view class="tab-bar">
+  <view class="tab-item {{activeTab === 'latest' ? 'active' : ''}}" bindtap="switchTab" data-tab="latest">
+    最新发布
+  </view>
+  <view class="tab-item {{activeTab === 'near' ? 'active' : ''}}" bindtap="switchTab" data-tab="near">
+    距离最近
+  </view>
+  <button class="publish-btn" bindtap="goPublish">
+    <text>📤</text> 发布信息
+  </button>
+</view>
+
+<!-- 信息列表 -->
+<view class="info-list">
+  <!-- 遍历信息列表 -->
+  <view class="info-card" wx:for="{{infoList}}" wx:key="id">
+    <view class="user-avatar">
+      <image src="{{item.avatar || '/images/me-1.png'}}" mode="aspectFill"></image>
+    </view>
+    <view class="info-content">
+      <view class="user-name">{{item.nickname || '匿名用户'}}</view>
+      <view class="info-tag">{{item.category}}</view>
+      <view class="info-text">{{item.content}}</view>
+      <!-- 仅保留单张图片展示 -->
+      <view class="info-single-img" wx:if="{{item.coverImg}}">
+        <image class="single-img" src="{{item.coverImg}}" mode="aspectFill"></image>
+      </view>
+    </view>
+  </view>
+
+  <!-- 空状态 -->
+  <view class="empty-tip" wx:if="{{infoList.length === 0}}">暂无信息，快去发布第一条吧~</view>
+</view>
+
+
+<!-- 右侧悬浮按钮组 -->
+<view class="float-btns">
+  <view class="float-btn share-btn" bindtap="onShare">
+    <text>⤴</text>
+  </view>
+  <view class="float-btn phone-btn" bindtap="onContact">
+    <text>📞</text>
+  </view>
+  <view class="float-btn backtop-btn" bindtap="onBackTop">
+    <image src="/images/me.png" mode="aspectFit"></image>
+  </view>
+</view>

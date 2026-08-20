@@ -1,0 +1,280 @@
+/* 搜索框 */
+.search-bar {
+  background: #9333ea;
+  padding: 20rpx 30rpx 25rpx;
+}
+.search-input {
+  width: 100%;
+  height: 80rpx;
+  background: #fff;
+  border-radius: 50rpx;
+  padding: 15rpx 30rpx;
+  box-sizing: border-box;
+  font-size: 30rpx;
+  border: 1px solid red;
+}
+
+/* 轮播图 */
+.banner-swiper {
+  width: 100%;
+  margin: 20rpx auto;
+  height: 320rpx;
+  border-radius: 16rpx;
+  overflow: hidden;
+}
+.banner-img {
+  width: 100%;
+  height: 100%;
+}
+
+/* 宫格分类 */
+.grid-container {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 20rpx 10rpx;
+  background: #fff;
+  margin: 20rpx 0;
+}
+.grid-item {
+  width: 20%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 30rpx;
+}
+.grid-icon {
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 30rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 40rpx;
+  margin-bottom: 12rpx;
+}
+/* 各个图标背景色 */
+.color1 {background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);}
+.color2 {background: linear-gradient(135deg, #c471ed 0%, #9179f2 100%);}
+.color3 {background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);}
+.color4 {background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);}
+.color5 {background: linear-gradient(135deg, #30cfd0 0%, #330867 100%);}
+.color6 {background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);}
+.color7 {background: linear-gradient(135deg, #ff9966 0%, #ff5e62 100%);}
+.color8 {background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);}
+.color9 {background: linear-gradient(135deg, #fa709a 0%, #f9a7ae 100%);}
+.color10 {background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);}
+
+.grid-text {
+  font-size: 26rpx;
+  color: #333;
+}
+
+/* 卡片区域 */
+.card-container {
+  display: grid;
+  /* 微信小程序兼容grid布局，也可以换成flex实现 */
+  grid-template-columns: 1fr 1fr;
+  gap: 32rpx;
+  padding: 32rpx;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+/* 左侧大卡片（占右侧两个高度） */
+.left-card {
+  grid-row: 1 / span 2;
+  border-radius: 16rpx;
+  overflow: hidden;
+  position: relative;
+  color: #fff;
+}
+
+/* 右侧两个小卡片 */
+.right-card {
+  height: 150rpx;
+  border-radius: 16rpx;
+  overflow: hidden;
+  position: relative;
+  color: #fff;
+}
+
+/* 文字内容样式 */
+.card-title {
+  position: absolute;
+  top: 40rpx;
+  left: 32rpx;
+  font-size: 44rpx;
+  font-weight: bold;
+  z-index: 2;
+}
+.card-desc {
+  position: absolute;
+  top: 112rpx;
+  left: 32rpx;
+  font-size: 28rpx;
+  opacity: 0.9;
+  z-index: 2;
+}
+/* 背景图 */
+.card-bg {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+/* 闲置信息 */
+.flea-container {
+  width: 100%;
+  margin: 0 auto;
+  background: #ffffff;
+  padding: 30rpx;
+  box-sizing: border-box;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30rpx;
+}
+.section-title {
+  font-size: 32rpx;
+  color: #333333;
+  font-weight: 500;
+}
+.view-all {
+  font-size: 26rpx;
+  color: #666666;
+}
+
+/* 2列网格布局，自动适配 */
+.goods-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30rpx;
+}
+.goods-card {
+  position: relative;
+  border-radius: 12rpx;
+  overflow: hidden;
+  background: #f5f5f5;
+}
+.goods-img {
+  width: 100%;
+  height: 300rpx;
+  background: #f0f0f0;
+}
+.share-btn {
+  position: absolute;
+  top: 15rpx;
+  right: 15rpx;
+  width: 56rpx;
+  height: 56rpx;
+  background: rgba(100,100,100,.8);
+  border-radius: 6rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 28rpx;
+}
+.goods-info {
+  padding: 16rpx 0;
+}
+.goods-name {
+  font-size: 30rpx;
+  color: #222222;
+  margin-bottom: 12rpx;
+}
+.goods-desc {
+  font-size: 26rpx;
+  color: #666666;
+  margin-bottom: 16rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.goods-price {
+  font-size: 28rpx;
+  color: #ff5500;
+  font-weight: 500;
+}
+/* 校园资讯 */
+.campus-news{
+  width: 100%;
+  box-sizing: border-box;
+  padding: 16rpx;
+  background: #fff;
+}
+.head{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 32rpx;
+}
+.title{
+  font-size: 44rpx;
+  color: #333;
+}
+.more{
+  font-size: 32rpx;
+  color: #666;
+}
+.news-item{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30rpx 0;
+  border-bottom: 1rpx solid #eee;
+  /* 防止内容把item撑变形 */
+  overflow: hidden;
+}
+.news-item:last-child{
+  border-bottom: none;
+}
+.news-text{
+  flex: 1;
+  padding-right: 30rpx;
+  display: flex;
+  flex-direction: column;
+  gap: 16rpx;
+}
+.item-title{
+  font-size: 40rpx;
+  color: #222;
+}
+/* 增加描述文字超出一行自动省略，不会撑挤布局 */
+.item-desc{
+  font-size: 32rpx;
+  color: #666;
+  line-height: 1.4;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  /* 控制最多显示1行，要显示2行改成2 */
+  -webkit-line-clamp: 1;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  white-space: normal;
+}
+.meta{
+  display: flex;
+  justify-content: space-between;
+  font-size: 28rpx;
+  color: #888;
+}
+/* 图片容器固定尺寸+溢出隐藏，不管图片多大都不会超出 */
+.img-wrap{
+  width: 250rpx;
+  height: 150rpx;
+  border-radius: 8rpx;
+  /* 关键：超出容器的部分自动隐藏，不会挤走文字 */
+  overflow: hidden;
+}
+.news-img{
+  /* 图片填满整个容器，配合aspectFill裁剪超出部分 */
+  width: 100%;
+  height: 100%;
+}
