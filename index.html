@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的作品集</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            background-color: #f5f7fa;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 80px 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 700px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #2d3748;
+            font-size: 36px;
+            margin-bottom: 60px;
+            font-weight: 600;
+        }
+
+        .project-card {
+            background-color: white;
+            border-radius: 12px;
+            padding: 28px 32px;
+            margin-bottom: 24px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: block;
+        }
+
+        .project-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+        }
+
+        .project-card h2 {
+            color: #2b6cb0;
+            font-size: 22px;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .project-card p {
+            color: #718096;
+            font-size: 15px;
+        }
+
+        footer {
+            margin-top: 80px;
+            color: #a0aec0;
+            font-size: 14px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>我的项目作品集</h1>
+        
+        <a href="./work1/index.html" class="project-card">
+            <h2>项目一 企业官网静态响应式页面</h2>
+            <p>点击进入查看第一个项目内容</p>
+        </a>
+
+        <a href="./work2/admin.html" class="project-card">
+            <h2>项目二 企业后台静态管理系统-设备营销管理</h2>
+            <p>点击进入查看第二个项目内容</p>
+        </a>
+
+        <a href="./work3/employee-manage.html" class="project-card">
+            <h2>项目三 人事部静态管理工作系统</h2>
+            <p>点击进入查看第三个项目内容</p>
+        </a>
+
+        <a href="./face-recognition-system/README.md" class="project-card">
+            <h2>项目四 人脸识别管理系统Python</h2>
+            <p>点击进入查看第四个项目内容</p>
+        </a>
+
+        <a href="./wechat-miniprogram/README.md" class="project-card">
+            <h2>项目五 校园闲置-微信小程序版</h2>
+            <p>点击进入查看第五个项目内容</p>
+        </a>
+    </div>
+
+    <footer>
+        © 2026 我的作品集
+    </footer>
+</body>
+</html>

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>联系我们 - 邯郸顺鑫机械制造</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <style>
+        .contact-wrap {
+            padding: 4rem 0;
+        }
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+        .contact-info {
+            line-height: 2.5;
+            font-size: 1.05rem;
+        }
+        .form-box {
+            padding: 2rem;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+        }
+        .form-item {
+            margin-bottom: 1.5rem;
+        }
+        .form-item label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #1D2129;
+        }
+        .form-item input, .form-item textarea {
+            width: 100%;
+            padding: 0.9rem;
+            border: 1px solid #e5e6eb;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+        .submit-btn {
+            width: 100%;
+            background: #165DFF;
+            color: #fff;
+            border: none;
+            padding: 1rem;
+            font-size: 1.1rem;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .submit-btn:hover {
+            background: #0F49C9;
+        }
+        @media (max-width:768px) {
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="top-nav">
+        <div class="container wrap">
+            <span>邯郸顺鑫机械 · 本地12年专业制造经验</span>
+            <span>咨询热线：0310-12345678</span>
+        </div>
+    </div>
+    <nav class="main-nav">
+        <div class="container wrap">
+            <div class="logo">顺鑫机械</div>
+            <ul class="nav-menu">
+                <li><a href="index.html">首页</a></li>
+                <li><a href="products.html">产品展示</a></li>
+                <li><a href="about.html">关于我们</a></li>
+                <li><a href="contact.html" class="active">联系我们</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="page-banner">联系我们</div>
+
+    <div class="container contact-wrap">
+        <h2 class="section-title">与我们取得联系</h2>
+        <div class="contact-grid">
+            <div class="contact-info">
+                <h3 style="color: #165DFF; margin-bottom: 1rem;">基础联系信息</h3>
+                <p>📞 销售咨询热线：0310-12345678</p>
+                <p>🔧 售后运维热线：0310-87654321</p>
+                <p>📍 公司地址：邯郸市经济开发区智能制造产业园A区12号</p>
+                <p>📧 商务合作邮箱：business@hengshunjx.com</p>
+                <p>⏰ 客服中心服务时间：周一至周日 8:00-20:00 全年无休</p>
+
+                <h3 style="color: #165DFF; margin-top: 2rem; margin-bottom: 1rem;">售后运维网点</h3>
+                <p>邯郸市区主网点、武安分部、永年分部、磁县分部，全域覆盖，2小时上门响应</p>
+            </div>
+
+            <div class="form-box">
+                <h3 style="margin-bottom: 1.5rem;">在线联系我们</h3>
+                <div class="form-item">
+                    <label>您的姓名</label>
+                    <input type="text" placeholder="请输入您的姓名">
+                </div>
+                <div class="form-item">
+                    <label>联系电话</label>
+                    <input type="tel" placeholder="请输入您的联系电话">
+                </div>
+                <div class="form-item">
+                    <label>咨询内容</label>
+                    <textarea rows="5" placeholder="请描述您的需求，我们的客服将在1小时内与您联系"></textarea>
+                </div>
+                <button class="submit-btn" onclick="alert('提交成功！我们会尽快联系您')">提交咨询</button>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div>
+                    <h3>关于顺鑫</h3>
+                    <p>邯郸顺鑫机械制造有限公司成立于2014年，是冀南地区专注工业设备研发制造的高新技术企业</p>
+                </div>
+                <div>
+                    <h3>快速导航</h3>
+                    <p><a href="index.html">首页</a></p>
+                    <p><a href="products.html">产品展示</a></p>
+                    <p><a href="about.html">关于我们</a></p>
+                    <p><a href="contact.html">联系我们</a></p>
+                    <p><a href="about.html#join">招聘信息</a></p>
+                </div>
+                <div>
+                    <h3>联系我们</h3>
+                    <p>地址：邯郸市经济开发区开发区路123号</p>
+                    <p>电话：0310-12345678</p>
+                    <p>邮箱：service@hengshunjx.com</p>
+                </div>
+            </div>
+            <div class="copyright">
+                © 2026 邯郸顺鑫机械制造有限公司 版权所有 冀ICP备XXXXXXXX号
+            </div>
+        </div>
+    </footer>
+
+    <script src="./js/main.js"></script>
+</body>
+</html>

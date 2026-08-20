@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>工业设备销售后台管理系统</title>
+    <link rel="stylesheet" href="./css/admin.css">
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+</head>
+<body>
+    <!-- 后台主界面 -->
+    <div class="main-layout" id="mainPage">
+        <div class="sidebar">
+            <div class="logo">设备销售管理</div>
+            <div class="menu-item active" data-page="dashboard">数据概览</div>
+            <div class="menu-item" data-page="order">订单管理</div>
+            <div class="menu-item" data-page="customer">客户管理</div>
+            <div class="menu-item" data-page="setting">系统设置</div>
+        </div>
+        <div class="content-wrap">
+            <div class="header">
+                <span>工业设备销售后台管理系统</span>
+            </div>
+            <div class="page-content">
+                <!-- 仪表盘页面 -->
+                <div class="page" id="page-dashboard">
+                    <div class="page-title">经营数据概览</div>
+                    <div class="card-group">
+                        <div class="stat-card">
+                            <div class="name">当月销售额</div>
+                            <div class="num" id="monthSale">0</div>
+                            <div class="unit">元</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="name">订单总数</div>
+                            <div class="num" id="totalOrder">0</div>
+                            <div class="unit">单</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="name">签单成功率</div>
+                            <div class="num" id="successRate">0%</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="name">客户总数</div>
+                            <div class="num" id="totalCustomer">0</div>
+                            <div class="unit">家</div>
+                        </div>
+                    </div>
+                    <div class="card-group">
+                        <div class="stat-card">
+                            <div class="name">待处理订单</div>
+                            <div class="num" id="pendingOrder">0</div>
+                            <div class="unit">单</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="name">本月新增客户</div>
+                            <div class="num" id="monthNewCustomer">0</div>
+                            <div class="unit">家</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="name">总成交金额</div>
+                            <div class="num" id="totalAmount">0</div>
+                            <div class="unit">元</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="name">待支付金额</div>
+                            <div class="num" id="unpaidAmount">0</div>
+                            <div class="unit">元</div>
+                        </div>
+                    </div>
+                    <div class="chart-group">
+                        <div class="chart-card">
+                            <h4>2026年度销售趋势</h4>
+                            <div id="lineChart" class="chart-wrap"></div>
+                        </div>
+                        <div class="chart-card">
+                            <h4>订单状态分布</h4>
+                            <div id="pieChart" class="chart-wrap"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 订单管理页面 -->
+                <div class="page hide" id="page-order">
+                    <div class="page-title">订单管理</div>
+                    <div class="search-bar">
+                        <div class="search-item">
+                            <span>订单号/客户名/产品：</span>
+                            <input type="text" id="orderKeyword" placeholder="输入任意字符实时搜索" oninput="realTimeOrderSearch()">
+                        </div>
+                        <div class="search-item">
+                            <span>订单状态：</span>
+                            <select id="orderStatusFilter" onchange="realTimeOrderSearch()">
+                                <option value="">全部状态</option>
+                                <option value="待支付">待支付</option>
+                                <option value="生产中">生产中</option>
+                                <option value="已发货">已发货</option>
+                                <option value="已完成">已完成</option>
+                                <option value="已取消">已取消</option>
+                            </select>
+                        </div>
+                        <div class="search-item">
+                            <span>下单时间：</span>
+                            <input type="date" id="orderStartDate" onchange="realTimeOrderSearch()">
+                            <span>-</span>
+                            <input type="date" id="orderEndDate" onchange="realTimeOrderSearch()">
+                        </div>
+                        <button class="btn-small" onclick="resetOrderSearch()">重置</button>
+                        <button class="btn-small" onclick="showOrderModal()">添加订单</button>
+                        <button class="btn-small" onclick="exportOrder()">导出订单</button>
+                    </div>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>订单ID</th>
+                                <th>客户名称</th>
+                                <th>联系人</th>
+                                <th>联系电话</th>
+                                <th>订购产品</th>
+                                <th>订单金额</th>
+                                <th>订单状态</th>
+                                <th>下单时间</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody id="orderTableBody">
+                            
+                        </tbody>
+                    </table>
+                    <div class="pagination" id="orderPagination"></div>
+                </div>
+
+                <!-- 客户管理页面 -->
+                <div class="page hide" id="page-customer">
+                    <div class="page-title">客户管理</div>
+                    <div class="search-bar">
+                        <div class="search-item">
+                            <span>客户名/手机号：</span>
+                            <input type="text" id="customerKeyword" placeholder="输入任意字符实时搜索" oninput="realTimeCustomerSearch()">
+                        </div>
+                        <button class="btn-small" onclick="resetCustomerSearch()">重置</button>
+                        <button class="btn-small" onclick="showCustomerModal()">添加客户</button>
+                        <button class="btn-small" onclick="exportCustomer()">导出客户</button>
+                    </div>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>客户ID</th>
+                                <th>客户名称</th>
+                                <th>联系人</th>
+                                <th>联系电话</th>
+                                <th>地址</th>
+                                <th>累计消费</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody id="customerTableBody">
+                            
+                        </tbody>
+                    </table>
+                    <div class="pagination" id="customerPagination"></div>
+                </div>
+
+                <!-- 系统设置页面 -->
+                <div class="page hide" id="page-setting">
+                    <div class="page-title">系统设置</div>
+                    <div class="setting-wrap">
+                        <div class="form-item">
+                            <label>系统名称</label>
+                            <input type="text" id="systemName" value="工业设备销售后台管理系统">
+                        </div>
+                        <div class="form-item">
+                            <label>每页显示条数</label>
+                            <select id="pageSize">
+                                <option value="10">10条</option>
+                                <option value="20">20条</option>
+                                <option value="50">50条</option>
+                            </select>
+                        </div>
+                        <div style="margin-top:20px;">
+                            <button class="btn" style="width:auto;" onclick="saveSetting()">保存设置</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 编辑订单弹窗 -->
+    <div class="modal-mask" id="orderModal">
+        <div class="modal">
+            <h3 id="orderModalTitle">新增订单</h3>
+            <input type="hidden" id="editOrderIndex" value="-1">
+            <div class="form-item">
+                <label>客户名称</label>
+                <input type="text" id="orderCustomer" placeholder="请输入客户名称">
+            </div>
+            <div class="form-item">
+                <label>联系人</label>
+                <input type="text" id="orderContact" placeholder="请输入对接人姓名">
+            </div>
+            <div class="form-item">
+                <label>联系电话</label>
+                <input type="text" id="orderPhone" placeholder="请输入联系电话">
+            </div>
+            <div class="form-item">
+                <label>订购产品</label>
+                <input type="text" id="orderProduct" placeholder="如：数控中控机/高精度车床">
+            </div>
+            <div class="form-item">
+                <label>订单金额</label>
+                <input type="number" id="orderPrice" placeholder="请输入订单金额">
+            </div>
+            <div class="form-item">
+                <label>订单状态</label>
+                <select id="orderStatus">
+                    <option value="待支付">待支付</option>
+                    <option value="生产中">生产中</option>
+                    <option value="已发货">已发货</option>
+                    <option value="已完成">已完成</option>
+                    <option value="已取消">已取消</option>
+                </select>
+            </div>
+            <div style="display:flex;gap:10px;">
+                <button class="btn-small" onclick="saveOrder()">保存修改</button>
+                <button class="btn-small del" onclick="hideOrderModal()">取消</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 编辑客户弹窗 -->
+    <div class="modal-mask" id="customerModal">
+        <div class="modal">
+            <h3 id="customerModalTitle">新增客户</h3>
+            <input type="hidden" id="editCustomerIndex" value="-1">
+            <div class="form-item">
+                <label>客户名称</label>
+                <input type="text" id="customerName" placeholder="请输入客户名称">
+            </div>
+            <div class="form-item">
+                <label>联系人</label>
+                <input type="text" id="customerContact" placeholder="请输入对接人姓名">
+            </div>
+            <div class="form-item">
+                <label>联系电话</label>
+                <input type="text" id="customerPhone" placeholder="请输入联系电话">
+            </div>
+            <div class="form-item">
+                <label>地址</label>
+                <input type="text" id="customerAddr" placeholder="请输入公司地址">
+            </div>
+            <div style="display:flex;gap:10px;">
+                <button class="btn-small" onclick="saveCustomer()">保存修改</button>
+                <button class="btn-small del" onclick="hideCustomerModal()">取消</button>
+            </div>
+        </div>
+    </div>
+
+    
+    <script src="./js/admin.js"></script>
+</body>
+</html>
