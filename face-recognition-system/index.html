@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>全栈Python人脸检测系统</title>
+    <style>
+        /* 全局基础重置 保证全浏览器兼容性 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: #f8fafc;
+            color: #1e293b;
+            line-height: 1.7;
+            padding: 20px 16px;
+        }
+
+        /* 主容器 自适应最大宽度 */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.06);
+            padding: 48px 32px;
+        }
+
+        /* 大标题样式 */
+        h1 {
+            font-size: clamp(24px, 5vw, 36px);
+            color: #0f172a;
+            text-align: center;
+            padding-bottom: 16px;
+            border-bottom: 2px solid #3b82f6;
+            margin-bottom: 40px;
+            font-weight: 600;
+        }
+
+        /* 导航按钮组 */
+        .nav-buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 40px;
+        }
+
+        .nav-btn {
+            padding: 12px 28px;
+            background-color: #3b82f6;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .nav-btn:hover {
+            background-color: #2563eb;
+        }
+
+        .nav-btn.secondary {
+            background-color: #f1f5f9;
+            color: #1e293b;
+        }
+
+        .nav-btn.secondary:hover {
+            background-color: #e2e8f0;
+        }
+
+        /* 通用二级标题 */
+        h2 {
+            font-size: clamp(18px, 3vw, 24px);
+            color: #1d4ed8;
+            margin: 36px 0 16px;
+            font-weight: 600;
+        }
+
+        /* 技术标签组 */
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 12px 0 24px;
+        }
+
+        .tech-tag {
+            background-color: #eff6ff;
+            color: #1d4ed8;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 500;
+        }
+
+        /* 核心功能卡片 */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+            margin: 24px 0;
+        }
+
+        .feature-card {
+            background-color: #f8fafc;
+            padding: 24px;
+            border-radius: 12px;
+            border-left: 4px solid #3b82f6;
+            transition: transform 0.2s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-2px);
+        }
+
+        .feature-card h3 {
+            font-size: 18px;
+            color: #0f172a;
+            margin-bottom: 8px;
+        }
+
+        /* 亮点高亮块 */
+        .highlight-block {
+            background-color: #fef3c7;
+            color: #92400e;
+            padding: 16px 20px;
+            border-radius: 10px;
+            margin: 24px 0;
+            font-weight: 500;
+        }
+
+        /* 简化后的特色功能区块 */
+        .simple-feature {
+            background-color: #ecfdf5;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 24px 0;
+            border-left: 4px solid #10b981;
+        }
+
+        .simple-feature h3 {
+            color: #065f46;
+            margin-bottom: 8px;
+            font-size: 17px;
+        }
+
+        /* 截图展示区域 */
+        .screenshot-area {
+            margin-top: 20px;
+            display: grid;
+            gap: 20px;
+        }
+
+        .screenshot-area img {
+            width: 100%;
+            border-radius: 10px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        /* 段落和列表 */
+        p {
+            font-size: 16px;
+            margin-bottom: 12px;
+        }
+
+        ul {
+            padding-left: 22px;
+            margin: 12px 0;
+        }
+
+        li {
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        /* 页脚 */
+        footer {
+            text-align: center;
+            margin-top: 48px;
+            padding-top: 24px;
+            border-top: 1px solid #e2e8f0;
+            color: #64748b;
+            font-size: 14px;
+        }
+
+        /* 小屏幕适配 手机端优化边距 */
+        @media (max-width: 768px) {
+            .container {
+                padding: 32px 20px;
+            }
+            .nav-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            .nav-btn {
+                width: 100%;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>全栈Python人脸检测系统</h1>
+
+        <!-- 导航按钮区域 -->
+        <div class="nav-buttons">
+            <a href="#screenshot" class="nav-btn">📷 查看运行截图</a>
+            <a href="https://github.com/dndsaj/dndsaj-frontend-portfolio/tree/main/face-recognition-system/app.py" target="_blank" class="nav-btn secondary">💻 查看项目源码</a>
+        </div>
+
+        <h2>技术栈</h2>
+        <div class="tech-stack">
+            <span class="tech-tag">Python</span>
+            <span class="tech-tag">OpenCV</span>
+            <span class="tech-tag">InsightFace</span>
+            <span class="tech-tag">NumPy</span>
+            <span class="tech-tag">PIL</span>
+            <span class="tech-tag">Tkinter</span>
+            <span class="tech-tag">Pickle</span>
+        </div>
+
+        <h2>核心三大功能板块</h2>
+        <div class="feature-grid">
+            <div class="feature-card">
+                <h3>✅ 人脸识别板块</h3>
+                <p>实时调用摄像头完成人脸检测与身份核验，毫秒级返回识别结果</p>
+            </div>
+            <div class="feature-card">
+                <h3>✅ 人脸录入板块</h3>
+                <p>可视化引导采集人脸样本，自动提取特征向量存入本地数据库</p>
+            </div>
+            <div class="feature-card">
+                <h3>✅ 人员数据管理板块</h3>
+                <p>支持人员信息的增删改查，一键完成人脸数据库的维护与清理</p>
+            </div>
+        </div>
+
+        <!-- 黄色准确率高亮块 -->
+        <div class="highlight-block">
+            整体识别准确率达到95%，满足日常场景下的实时识别使用需求
+        </div>
+
+        <!-- 移到准确率块下方的简化特色功能区块 -->
+        <div class="simple-feature">
+            <h3>✨ 特色功能：查看当前识别详情</h3>
+            <p>摄像头画面下方设置专属功能按钮，点击后立即暂停摄像，截取当前帧画面，弹窗展示画面中所有已识别人员的完整信息，方便结果回溯核验。</p>
+        </div>
+
+        <h2>项目实现亮点</h2>
+        <ul>
+            <li>利用InsightFace预训练模型完成人脸特征提取，结合NumPy完成图像预处理与特征比对，优化识别速度满足实时识别要求</li>
+            <li>通过os模块完成人脸数据集的文件管理，使用Tkinter开发可视化交互界面，支持用户信息录入、人脸数据库管理等全流程操作</li>
+            <li>解决了传统人工监控效率低、识别精度不足的问题，可实现对指定人员的实时身份监测与识别</li>
+        </ul>
+
+        <h2>项目说明</h2>
+        <p>这是一套完全端侧运行的轻量化人脸识别系统，无需依赖云端服务，所有运算都在本地设备完成，部署门槛低、运行稳定，可直接落地用于小型场景的人员身份核验需求。</p>
+
+        <!-- 运行截图展示区域 -->
+        <h2 id="screenshot">项目运行效果截图</h2>
+        <div class="screenshot-area">
+            <!-- 你直接把自己的截图文件名替换进去就可以，和HTML放在同一个文件夹里 -->
+            <img src="./demo-1.png" alt="人脸识别功能运行界面">
+            <img src="./demo-2.png" alt="人脸录入功能运行界面">
+        </div>
+
+        <footer>
+            基于Python开发的端侧人脸识别系统
+            👉 提示：如果本地运行出现文件路径找不到的问题，以app.py所在文件夹作为工作目录启动即可正常运行。后续版本已重构为动态绝对路径适配全场景运行。
+        </footer>
+    </div>
+</body>
+</html>

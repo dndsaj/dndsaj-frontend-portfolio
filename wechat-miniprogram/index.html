@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>校园闲置 - 微信小程序</title>
+    <style>
+        /* 全局基础重置*/
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: #f8fafc;
+            color: #1e293b;
+            line-height: 1.7;
+            padding: 20px 16px;
+        }
+
+        /* 主容器 */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.06);
+            padding: 48px 32px;
+        }
+
+        /* 大标题样式 */
+        h1 {
+            font-size: clamp(24px, 5vw, 36px);
+            color: #0f172a;
+            text-align: center;
+            padding-bottom: 16px;
+            border-bottom: 2px solid #7c3aed;
+            margin-bottom: 40px;
+            font-weight: 600;
+        }
+
+        /* 导航按钮组 */
+        .nav-buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 40px;
+        }
+
+        .nav-btn {
+            padding: 12px 28px;
+            background-color: #7c3aed;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .nav-btn:hover {
+            background-color: #6d28d9;
+        }
+
+        .nav-btn.secondary {
+            background-color: #f1f5f9;
+            color: #1e293b;
+        }
+
+        .nav-btn.secondary:hover {
+            background-color: #e2e8f0;
+        }
+
+        /* 通用二级标题 */
+        h2 {
+            font-size: clamp(18px, 3vw, 24px);
+            color: #6d28d9;
+            margin: 36px 0 16px;
+            font-weight: 600;
+        }
+
+        /* 技术标签组 */
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 12px 0 24px;
+        }
+
+        .tech-tag {
+            background-color: #f5f3ff;
+            color: #6d28d9;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 500;
+        }
+
+        /* 核心功能卡片 */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+            margin: 24px 0;
+        }
+
+        .feature-card {
+            background-color: #f8fafc;
+            padding: 24px;
+            border-radius: 12px;
+            border-left: 4px solid #7c3aed;
+            transition: transform 0.2s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-2px);
+        }
+
+        .feature-card h3 {
+            font-size: 18px;
+            color: #0f172a;
+            margin-bottom: 8px;
+        }
+
+        /* 亮点高亮块 */
+        .highlight-block {
+            background-color: #fef3c7;
+            color: #92400e;
+            padding: 16px 20px;
+            border-radius: 10px;
+            margin: 24px 0;
+            font-weight: 500;
+        }
+
+        /* 2x2方块网格布局 */
+        .screenshot-area {
+            margin-top: 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .screenshot-area .screenshot-card {
+            border-radius: 10px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            overflow: hidden;
+            transition: transform 0.2s ease;
+        }
+
+        .screenshot-area .screenshot-card:hover {
+            transform: translateY(-3px);
+        }
+
+        .screenshot-area img {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: cover;
+        }
+
+        .screenshot-area .screenshot-caption {
+            padding: 12px;
+            text-align: center;
+            font-size: 14px;
+            color: #475569;
+            background-color: #f8fafc;
+        }
+
+        /* 段落和列表 */
+        p {
+            font-size: 16px;
+            margin-bottom: 12px;
+        }
+
+        ul {
+            padding-left: 22px;
+            margin: 12px 0;
+        }
+
+        li {
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        /* 页脚 */
+        footer {
+            text-align: center;
+            margin-top: 48px;
+            padding-top: 24px;
+            border-top: 1px solid #e2e8f0;
+            color: #64748b;
+            font-size: 14px;
+        }
+
+        /* 小屏幕适配 */
+        @media (max-width: 768px) {
+            .container {
+                padding: 32px 20px;
+            }
+            .nav-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            .nav-btn {
+                width: 100%;
+                text-align: center;
+            }
+            .screenshot-area {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>校园闲置 - 微信小程序</h1>
+
+        <!-- 导航按钮区域 -->
+        <div class="nav-buttons">
+            <a href="#screenshot" class="nav-btn">📷 查看运行截图</a>
+            <a href="https://github.com/dndsaj/dndsaj-frontend-portfolio/blob/main/wechat-miniprogram/app.json" class="nav-btn secondary">💻 查看项目源码</a>
+        </div>
+
+        <h2>技术栈</h2>
+        <div class="tech-stack">
+            <span class="tech-tag">微信小程序原生开发</span>
+            <span class="tech-tag">WXML</span>
+            <span class="tech-tag">WXSS</span>
+            <span class="tech-tag">JavaScript</span>
+        </div>
+
+        <h2>核心三大功能板块</h2>
+        <div class="feature-grid">
+            <div class="feature-card">
+                <h3>✅ 闲置物品浏览与购买</h3>
+                <p>查看全平台闲置商品详情，包含物品实拍图、购入时间、成色、价格信息，一键联系卖家完成交易</p>
+            </div>
+            <div class="feature-card">
+                <h3>✅ 单页面多物品渲染</h3>
+                <p>首页网格布局批量渲染闲置物品卡片，分页加载机制保证滚动浏览全程流畅不卡顿</p>
+            </div>
+            <div class="feature-card">
+                <h3>✅ 闲置物品发布</h3>
+                <p>支持自定义选择物品分类、填写转让价格、上传实拍图，一键发布到平台供全校同学浏览</p>
+            </div>
+        </div>
+
+        <div class="highlight-block">
+            专为校园场景打造的全生态服务小程序，除闲置交易外还覆盖社团招新、兼职悬赏、失物招领等多元校园需求
+        </div>
+
+        <h2>项目实现亮点</h2>
+        <ul>
+            <li>采用微信小程序原生框架开发，无第三方跨端框架依赖，运行流畅度高，包体积小，微信内直接打开即可使用</li>
+            <li>单页面多物品渲染优化，通过分页加载避免一次性渲染大量数据导致页面卡顿，浏览体验顺滑</li>
+            <li>发布流程极简，学生填写物品分类、描述、价格、上传图片即可快速上架闲置物品，大幅降低二手交易门槛</li>
+            <li>底部Tab栏实现首页、圈子、资讯、个人中心四大模块无缝切换，完整覆盖校园生活各类服务场景</li>
+        </ul>
+
+        <h2>运行说明</h2>
+        <p>本项目为纯原生微信小程序项目，直接用微信开发者工具导入本地项目文件夹，点击预览即可在微信中正常体验所有功能。</p>
+
+        <!-- 2x2方块截图展示区域 -->
+        <h2 id="screenshot">项目运行效果截图</h2>
+        <div class="screenshot-area">
+            <div class="screenshot-card">
+                <img src="./images/demo10.png" alt="小程序首页：全场景校园服务聚合入口">
+                <div class="screenshot-caption">全场景校园服务聚合首页</div>
+            </div>
+            <div class="screenshot-card">
+                <img src="./images/demo11.png" alt="闲置物品列表页：网格布局批量渲染商品卡片">
+                <div class="screenshot-caption">闲置物品列表浏览页</div>
+            </div>
+            <div class="screenshot-card">
+                <img src="./images/demo12.png" alt="闲置物品详情页：商品信息展示+一键电话联系">
+                <div class="screenshot-caption">闲置物品详情展示页</div>
+            </div>
+            <div class="screenshot-card">
+                <img src="./images/demo13.png" alt="信息发布页：分类选择+内容编辑+图片上传">
+                <div class="screenshot-caption">闲置物品信息发布页</div>
+            </div>
+        </div>
+
+        <footer>
+            基于微信小程序原生开发的校园综合服务平台
+        </footer>
+    </div>
+</body>
+</html>
